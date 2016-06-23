@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="$root_css_class" dir="#language ("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	<title>$the_title - $company_name</title>
+
+	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
+
+	$theme.include($top_head_include)
+	
+</head>
+
+<body class="$css_class">
+
+<a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
+
+$theme.include($body_top_include)
+
+##网上查到的写法，只为管理员开放dockbar
+#if($is_signed_in)
+	#if($permissionChecker.isCompanyAdmin($company_id))
+		#dockbar()
+	#end
+#end
+<div class="ic_service">
+    <div class="ic_service_top">
+		<div class="ic_wrap">
+        	欢迎进入自主创新服务超市！
+        	<div class="ic_s_login">
+            	#if($is_signed_in)
+            		<div class="notice_icon" style="float:left;position: relative;">
+            	    	<a href="/group/mycenter/message" class = "icon-bell" style="position: absolute;top: 10px;right: 0;"></a>
+            	    	<span id = 'themenews' style="position:absolute;right:2px;font-size:11px;font-weight:bold;top:-5px;color:red;">0</span>
+        	    	</div>
+            	  	<a href="/group/mycenter/index" style = "margin-left: 10px;"><em></em><span>$user_first_name</span></a>
+            	  	<a href="/c/portal/logout"><em></em><span>退出</span></a>
+            	 #else
+            	 	<a href="/c/portal/login"><em></em><span>登录</span></a>
+            	    <a href="/web/guest/register"><em></em><span>注册</span></a>
+            	 #end
+            </div>
+         </div>
+    </div>
+</div>
+<div class="container-fluid" id="wrapper" style = "padding :0 0;">
+	<header id="banner" role="banner">
+		
+
+		#if ($has_navigation || $is_signed_in)
+			##parse ("$full_templates_path/navigation.vm")
+		#end
+	</header>
+	
+	<div id="content" style = "margin-left: auto;margin-right: auto">
+		
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+	</div>
+
+	
+</div>
+
+ <div class="ic_linkbox">
+		<dl class="ic_wrap">
+		       <dt style="line-height:90px;float:left;width:10%;">友情链接</dt>
+			<div style="line-height:90px;float:left;width:60%">
+			<div class="ic_wrap_item">
+				 <a href="http://www.sz-dy.gov.cn" target="_blank">大仪网</a> 
+				 <a href="http://www.suzhouinfo.cn" target="_blank">科技智库</a>
+				 <a href="http://sz.joinew.com" target="_blank">技遇网</a>
+				 <a href="http://www.rcsz.gov.cn" target="_blank">姑苏人才网</a>
+				 <a href="http://kjjr.szkj.gov.cn/szkjjrcs" target="_blank">苏州科技金融超市</a> 
+			</div>
+			<div class="ic_wrap_item">
+				 <a href="http://510.gov.cn" target="_blank">姑苏经科局</a> 
+				 <a href="http://www.sndkj.gov.cn/" target="_blank">高新科技局</a>
+				 <a href="http://tech.sipac.gov.cn/" target="_blank">园区科创网</a>
+				 <a href="http://www.kjxc.gov.cn/" target="_blank">相城科发局</a>
+				 <a href="http://www.kj.szwz.gov.cn/" target="_blank">吴中科技局</a> 
+			</div>
+			<div class="ic_wrap_item">
+				 <a href="http://www.wjkjj.gov.cn/wjkjj/" target="_blank">吴江科技局</a> 
+				 <a href="http://www.kssti.cn" target="_blank">昆山科信网</a>
+				 <a href="http://www.jstckj.gov.cn/" target="_blank">太仓科技局</a>
+				 <a href="http://www.zjgkj.gov.cn/kjxxg/" target="_blank">张家港科技局</a>
+				 <a href="http://www.cskj.gov.cn/content/" target="_blank">常熟科技局</a> 
+			</div>
+		</div>
+		<div style="background-color:blue;float:left;width:90px;height:90px;margin-left: 60px;"><img src="/kjcs_company-theme/tep-pic/wx_ma.jpg"></div>
+	</dl>
+</div>
+	<div class="ic_footer">
+		<div class="ic_wrap">
+		<p>版权所有 &copy; 苏州自主创新广场发展有限公司 2016-2020 All Rights Reserved  客服电话:4009-360-360  &nbsp;&nbsp;建议使用Chrome 浏览器
+   		  <script src="http://s4.cnzz.com/z_stat.php?id=1258549833&web_id=1258549833" language="JavaScript"></script>
+   		  </p>
+    	</div>
+	</div>
+	
+	
+$theme.include($body_bottom_include)
+
+$theme.include($bottom_include)
+##js("/kjcs_index-theme/js/jquery-1.9.1.min.js")
+##js("/kjcs_index-theme/js/chosen.jquery.min.js")
+##js("/kjcs_index-theme/js/jquery.slides.min.js")
+
+
+
+<script charset="utf-8" type="text/javascript" src="http://wpa.b.qq.com/cgi/wpa.php?key=XzgwMDE2NzE3N180MTQyODVfODAwMTY3MTc3Xw"></script>
+##判断qq是否在线的url参数
+#set($url="3381705929:3382595292:2822504182:")
+##if ($QQnum)
+	##set($url=$QQnum)
+##end
+
+<script>
+  	
+
+	<!-- 右边栏hoverJQuery -->
+	##$(".ic_s_b_wx").hover(function(){
+		##$(".wx_show").show();
+	##},function(){
+		##$(".wx_show").hide();
+	##});
+
+</script>
+</body>
+
+</html>

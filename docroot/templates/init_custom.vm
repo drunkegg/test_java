@@ -1,0 +1,4 @@
+#set ($css_class = "${css_class} dockbar-split")
+#set ($binding_url = $portletURLFactory.create($request, "updatauser_WAR_Testportlet",
+ $theme_display.getPlid(), "RENDER_PHASE"))
+$binding_url.setWindowState("pop_up")
